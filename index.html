@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vegard Bratrok — Business Analytics, Finance &amp; Entrepreneurship</title>
+<meta name="description" content="Vegard Bratrok — MS Business Analytics candidate at Babson College. Finance, consulting, technology, HYROX athlete, and founder of Thalk." />
+
+<!-- Fonts: Fraunces (editorial serif for headings) + Inter (clean sans for body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- Tailwind CSS via CDN (no build step) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          cream: "#FAF7F1",
+          "cream-dark": "#F1ECE1",
+          charcoal: "#2A2A28",
+          forest: {
+            DEFAULT: "#2F4A3C",
+            dark: "#1E3329",
+            light: "#4C6E58",
+          },
+          sage: "#8FA38C",
+          clay: "#B08A6A",
+          stone: "#6B6B63",
+        },
+        fontFamily: {
+          serif: ["Fraunces", "serif"],
+          sans: ["Inter", "sans-serif"],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: #FAF7F1;
+  }
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* Underline hover for links */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.3s ease;
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+
+  /* Nav link active indicator */
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 1px;
+    background-color: #2F4A3C;
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  /* Custom scrollbar accent (subtle) */
+  ::selection {
+    background-color: #2F4A3C;
+    color: #FAF7F1;
+  }
+
+  .timeline-line {
+    background: linear-gradient(to bottom, #2F4A3C 0%, #8FA38C 100%);
+  }
+
+  .hero-photo-frame {
+    box-shadow: 0 30px 60px -20px rgba(42, 42, 40, 0.25);
+  }
+
+  .card-hover {
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px -15px rgba(42, 42, 40, 0.18);
+  }
+
+  /* Marquee-like gentle fade for "Things I'm Exploring" tags */
+  .tag-chip {
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  .tag-chip:hover {
+    transform: translateY(-2px);
+  }
+</style>
+</head>
+
+<body class="font-sans text-charcoal antialiased">
+
+<!-- Skip link for accessibility -->
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-forest focus:text-cream focus:px-4 focus:py-2 focus:rounded">
+  Skip to main content
+</a>
+
+<!-- ===================== NAVIGATION ===================== -->
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-cream/80 backdrop-blur-md border-b border-charcoal/0">
+  <nav class="max-w-6xl mx-auto px-6 md:px-10 flex items-center justify-between h-20" aria-label="Primary navigation">
+    <a href="#home" class="font-serif text-xl tracking-wide text-forest-dark">
+      Vegard Bratrok
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden md:flex items-center gap-8 text-sm text-stone">
+      <li><a href="#about" class="nav-link hover:text-forest-dark transition-colors">About</a></li>
+      <li><a href="#education" class="nav-link hover:text-forest-dark transition-colors">Education</a></li>
+      <li><a href="#experience" class="nav-link hover:text-forest-dark transition-colors">Experience</a></li>
+      <li><a href="#projects" class="nav-link hover:text-forest-dark transition-colors">Projects</a></li>
+      <li><a href="#athletics" class="nav-link hover:text-forest-dark transition-colors">Athletics</a></li>
+      <li><a href="#beyond" class="nav-link hover:text-forest-dark transition-colors">Beyond</a></li>
+      <li>
+        <a href="#contact" class="inline-flex items-center px-4 py-2 rounded-full bg-forest text-cream text-sm hover:bg-forest-dark transition-colors">
+          Get in Touch
+        </a>
+      </li>
+    </ul>
+
+    <!-- Mobile menu button -->
+    <button id="menu-toggle" class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="block w-6 h-px bg-charcoal transition-transform duration-300" id="bar1"></span>
+      <span class="block w-6 h-px bg-charcoal transition-opacity duration-300" id="bar2"></span>
+      <span class="block w-6 h-px bg-charcoal transition-transform duration-300" id="bar3"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile nav panel -->
+  <div id="mobile-menu" class="md:hidden hidden bg-cream border-t border-charcoal/10">
+    <ul class="flex flex-col px-6 py-4 gap-4 text-stone">
+      <li><a href="#about" class="mobile-nav-link block py-1 hover:text-forest-dark">About</a></li>
+      <li><a href="#education" class="mobile-nav-link block py-1 hover:text-forest-dark">Education</a></li>
+      <li><a href="#experience" class="mobile-nav-link block py-1 hover:text-forest-dark">Experience</a></li>
+      <li><a href="#projects" class="mobile-nav-link block py-1 hover:text-forest-dark">Projects</a></li>
+      <li><a href="#athletics" class="mobile-nav-link block py-1 hover:text-forest-dark">Athletics</a></li>
+      <li><a href="#beyond" class="mobile-nav-link block py-1 hover:text-forest-dark">Beyond</a></li>
+      <li><a href="#contact" class="mobile-nav-link block py-1 text-forest-dark font-medium">Get in Touch</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main-content">
+
+<!-- ===================== HERO / HOME ===================== -->
+<section id="home" class="relative min-h-screen flex items-center pt-28 pb-16 px-6 md:px-10 overflow-hidden">
+  <!-- Decorative muted background shape -->
+  <div class="pointer-events-none absolute -top-24 -right-24 w-[420px] h-[420px] rounded-full bg-sage/10 blur-3xl"></div>
+  <div class="pointer-events-none absolute bottom-0 -left-32 w-[360px] h-[360px] rounded-full bg-forest/10 blur-3xl"></div>
+
+  <div class="max-w-6xl mx-auto w-full grid md:grid-cols-5 gap-12 items-center relative z-10">
+    <div class="md:col-span-3 reveal is-visible">
+      <p class="uppercase tracking-[0.2em] text-sm text-clay mb-5 font-medium">Norway → United States</p>
+      <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] text-charcoal mb-6">
+        Vegard<br />Bratrok
+      </h1>
+      <p class="text-lg md:text-xl text-forest-dark font-medium mb-6">
+        Business Analytics · Finance · Entrepreneurship · Endurance
+      </p>
+      <p class="text-stone text-base md:text-lg leading-relaxed max-w-xl mb-10">
+        I'm a Norwegian graduate student pursuing an MS in Business Analytics at Babson College, with a
+        background in finance, audit, and data analytics. I care about building things that are useful,
+        competing with discipline, and thinking carefully about how I spend my time — whether that's in a
+        spreadsheet, on a startline, or on a long walk.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#projects" class="px-7 py-3 rounded-full bg-forest text-cream hover:bg-forest-dark transition-colors text-sm font-medium">
+          View My Work
+        </a>
+        <a href="#contact" class="px-7 py-3 rounded-full border border-forest text-forest-dark hover:bg-forest hover:text-cream transition-colors text-sm font-medium">
+          Get in Touch
+        </a>
+      </div>
+    </div>
+
+    <div class="md:col-span-2 flex justify-center md:justify-end reveal reveal-delay-1 is-visible">
+      <div class="relative">
+        <div class="w-64 h-80 sm:w-72 sm:h-96 rounded-[2rem] overflow-hidden hero-photo-frame bg-cream-dark border border-charcoal/5 flex items-center justify-center">
+          <!-- PLACEHOLDER: Replace this block with <img src="your-photo.jpg" alt="Vegard Bratrok" class="w-full h-full object-cover" /> -->
+          <div class="text-center px-6 text-stone text-sm">
+            <span class="block font-serif text-lg text-forest-dark mb-2">[ Photo ]</span>
+            Add a professional photograph here
+          </div>
+        </div>
+        <div class="absolute -bottom-6 -left-6 w-24 h-24 rounded-2xl bg-forest/90 hidden sm:flex items-center justify-center text-cream font-serif text-sm text-center p-4 shadow-lg">
+          HYROX<br />1:07:23
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about" class="py-24 md:py-32 px-6 md:px-10 bg-cream-dark/60">
+  <div class="max-w-5xl mx-auto">
+    <div class="reveal mb-14">
+      <p class="uppercase tracking-[0.2em] text-sm text-clay mb-3 font-medium">About Me</p>
+      <h2 class="font-serif text-4xl md:text-5xl text-charcoal">From a small town in Norway to Babson College</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12">
+      <div class="reveal space-y-5 text-stone leading-relaxed">
+        <p>
+          I grew up in Norway and came to the United States to play Division I soccer and study business —
+          a decision that reshaped the trajectory of my education, my athletics, and honestly, how I think
+          about discipline and long-term goals. Four years later, I graduated summa cum laude from
+          Saint Joseph's University with a double major in Business Intelligence &amp; Analytics and Finance,
+          and I'm now pursuing an MS in Business Analytics at Babson College.
+        </p>
+        <p>
+          Academically, I'm drawn to the intersection of data, finance, and decision-making — the kind of
+          work where a clean dashboard or a well-built model actually changes what someone decides to do.
+          That curiosity has taken me through audit and assurance work, data analytics consulting, and
+          peer tutoring, and it's what I'm looking to build a career around in business analytics, finance,
+          consulting, or technology.
+        </p>
+      </div>
+
+      <div class="reveal reveal-delay-1 space-y-5 text-stone leading-relaxed">
+        <p>
+          Outside of the classroom, I've spent most of my life training for something — soccer first, and
+          now HYROX and distance running. I like the honesty of endurance sports: the clock doesn't care
+          about excuses, and the only way through is consistency. That same mindset is what led me to found
+          <span class="text-forest-dark font-medium">Thalk</span>, an iOS app built around walking, reflection,
+          and living a little more intentionally.
+        </p>
+        <p>
+          When I'm not working on a model or training, I'm usually reading philosophy or literature,
+          listening to music, or just walking outside without my phone. I care about doing ambitious work
+          without losing sight of why I'm doing it — that balance is probably the closest thing I have to
+          a personal philosophy.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EDUCATION ===================== -->
+<section id="education" class="py-24 md:py-32 px-6 md:px-10">
+  <div class="max-w-5xl mx-auto">
+    <div class="reveal mb-16">
+      <p class="uppercase tracking-[0.2em] text-sm text-clay mb-3 font-medium">Education</p>
+      <h2 class="font-serif text-4xl md:text-5xl text-charcoal">Academic Background</h2>
+    </div>
+
+    <div class="relative pl-10">
+      <div class="absolute left-[7px] top-2 bottom-2 w-px timeline-line"></div>
+
+      <!-- Babson -->
+      <div class="relative mb-16 reveal">
+        <span class="absolute -left-10 top-1.5 w-3.5 h-3.5 rounded-full bg-forest border-4 border-cream"></span>
+        <p class="text-sm text-clay font-medium mb-1 tracking-wide">2026 – 2027</p>
+        <h3 class="font-serif text-2xl text-charcoal mb-1">Babson College</h3>
+        <p class="text-forest-dark font-medium mb-3">MS in Business Analytics</p>
+        <p class="text-stone leading-relaxed max-w-2xl">
+          Graduate coursework focused on analytics, data-driven decision-making, and entrepreneurial
+          thinking. Expected graduation: May 2027.
+        </p>
+      </div>
+
+      <!-- SJU -->
+      <div class="relative reveal reveal-delay-1">
+        <span class="absolute -left-10 top-1.5 w-3.5 h-3.5 rounded-full bg-forest border-4 border-cream"></span>
+        <p class="text-sm text-clay font-medium mb-1 tracking-wide">2022 – 2026</p>
+        <h3 class="font-serif text-2xl text-charcoal mb-1">Saint Joseph's University</h3>
+        <p class="text-forest-dark font-medium mb-3">
+          BSBA — Business Intelligence &amp; Analytics and Finance (Double Major)
+        </p>
+        <p class="text-stone leading-relaxed max-w-2xl mb-4">
+          Graduated <span class="font-medium text-charcoal">summa cum laude</span> with a
+          <span class="font-medium text-charcoal">3.97 / 4.00 GPA</span>. Four-year member of the NCAA
+          Division I men's soccer program throughout.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <span class="px-4 py-1.5 rounded-full bg-forest/10 text-forest-dark text-sm">Summa Cum Laude</span>
+          <span class="px-4 py-1.5 rounded-full bg-forest/10 text-forest-dark text-sm">3.97 GPA</span>
+          <span class="px-4 py-1.5 rounded-full bg-forest/10 text-forest-dark text-sm">Department Undergraduate Student Award</span>
+          <span class="px-4 py-1.5 rounded-full bg-cream-dark text-stone text-sm border border-stone/20">
+            [ Add other academic honors ]
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROFESSIONAL EXPERIENCE ===================== -->
+<section id="experience" class="py-24 md:py-32 px-6 md:px-10 bg-cream-dark/60">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-16">
+      <p class="uppercase tracking-[0.2em] text-sm text-clay mb-3 font-medium">Professional Experience</p>
+      <h2 class="font-serif text-4xl md:text-5xl text-charcoal">Where I've Worked</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- EY Norway -->
+      <article class="reveal card-hover bg-cream rounded-2xl p-8 border border-charcoal/5">
+        <p class="text-xs uppercase tracking-wider text-clay mb-3">[ Add dates ]</p>
+        <h3 class="font-serif text-xl text-charcoal mb-1">Audit &amp; Assurance Intern</h3>
+        <p class="text-forest-dark font-medium mb-4">EY Norway</p>
+        <p class="text-stone text-sm leading-relaxed">
+          Supported audit and assurance engagements, gaining exposure to financial statement analysis,
+          risk assessment, and client reporting within a global professional services environment.
+        </p>
+      </article>
+
+      <!-- SJU Data Analytics Consultant -->
+      <article class="reveal reveal-delay-1 card-hover bg-cream rounded-2xl p-8 border border-charcoal/5">
+        <p class="text-xs uppercase tracking-wider text-clay mb-3">[ Add dates ]</p>
+        <h3 class="font-serif text-xl text-charcoal mb-1">Undergraduate Data Analytics Consultant</h3>
+        <p class="text-forest-dark font-medium mb-4">Saint Joseph's University</p>
+        <p class="text-stone text-sm leading-relaxed">
+          Worked on applied analytics engagements, translating business questions into data-driven
+          analysis and dashboards for campus and partner stakeholders.
+        </p>
+      </article>
+
+      <!-- Peer Tutor / Leadership -->
+      <article class="reveal reveal-delay-2 card-hover bg-cream rounded-2xl p-8 border border-charcoal/5">
+        <p class="text-xs uppercase tracking-wider text-clay mb-3">[ Add dates ]</p>
+        <h3 class="font-serif text-xl text-charcoal mb-1">Peer Tutor &amp; Academic Leadership</h3>
+        <p class="text-forest-dark font-medium mb-4">Saint Joseph's University</p>
+        <p class="text-stone text-sm leading-relaxed">
+          Tutored peers in business, analytics, and finance coursework while taking on academic
+          leadership roles that supported fellow students' success.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS & PORTFOLIO ===================== -->
+<section id="projects" class="py-24 md:py-32 px-6 md:px-10">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-16">
+      <p class="uppercase tracking-[0.2em] text-sm text-clay mb-3 font-medium">Projects &amp; Portfolio</p>
+      <h2 class="font-serif text-4xl md:text-5xl text-charcoal">Selected Work</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-8">
+      <!-- Thalk -->
+      <article class="reveal card-hover group rounded-2xl overflow-hidden border border-charcoal/5 bg-cream-dark/50">
+        <div class="h-56 bg-forest/10 flex items-center justify-center text-stone text-sm">
+          <!-- PLACEHOLDER: Replace with an <img> of the Thalk app screenshot -->
+          [ Thalk app screenshot ]
+        </div>
+        <div class="p-8">
+          <h3 class="font-serif text-2xl text-charcoal mb-2">Thalk</h3>
+          <p class="text-stone text-sm leading-relaxed mb-5">
+            An iOS app I founded to encourage walking, reflection, and more intentional living —
+            built around the idea that a simple walk can be a meaningful reset for the day.
+          </p>
+          <a href="#contact" class="link-underline text-forest-dark text-sm font-medium">
+            [ Add App Store / Thalk link ] →
+          </a>
+        </div>
+      </article>
+
+      <!-- Tableau dashboards -->
+      <article class="reveal reveal-delay-1 card-hover group rounded-2xl overflow-hidden border border-charcoal/5 bg-cream-dark/50">
+        <div class="h-56 bg-forest/10 flex items-center justify-center text-stone text-sm">
+          <!-- PLACEHOLDER: Replace with a dashboard screenshot -->
+          [ Tableau dashboard screenshot ]
+        </div>
+        <div class="p-8">
+          <h3 class="font-serif text-2xl text-charcoal mb-2">Tableau Dashboards</h3>
+          <p class="text-stone text-sm leading-relaxed mb-5">
+            Data visualization and dashboarding work built in Tableau as part of coursework and
+            analytics consulting engagements. [ Add specific dashboard descriptions here ]
+          </p>
+          <a href="#contact" class="link-underline text-forest-dark text-sm font-medium">
+            [ Add Tableau Public link ] →
+          </a>
+        </div>
+      </article>
+
+      <!-- Energy analytics -->
+      <article class="reveal reveal-delay-2 card-hover group rounded-2xl overflow-hidden border border-charcoal/5 bg-cream-dark/50">
+        <div class="h-56 bg-forest/10 flex items-center justify-center text-stone text-sm">
+          <!-- PLACEHOLDER: Replace with a project screenshot -->
+          [ Energy analytics project screenshot ]
+        </div>
+        <div class="p-8">
+          <h3 class="font-serif text-2xl text-charcoal mb-2">Energy Analytics Project</h3>
+          <p class="text-stone text-sm leading-relaxed mb-5">
+            [ Add a short description of this project, methods used, and tools involved. ]
+          </p>
+          <a href="#contact" class="link-underline text-forest-dark text-sm font-medium">
+            [ Add project link / write-up ] →
+          </a>
+        </div>
+      </article>
+
+      <!-- Academic consulting -->
+      <article class="reveal reveal-delay-3 card-hover group rounded-2xl overflow-hidden border border-charcoal/5 bg-cream-dark/50">
+        <div class="h-56 bg-forest/10 flex items-center justify-center text-stone text-sm">
+          <!-- PLACEHOLDER: Replace with a project screenshot -->
+          [ Academic consulting project screenshot ]
+        </div>
+        <div class="p-8">
+          <h3 class="font-serif text-2xl text-charcoal mb-2">Academic Consulting Project</h3>
+          <p class="text-stone text-sm leading-relaxed mb-5">
+            [ Add a short description of the consulting engagement, your role, and outcomes. ]
+          </p>
+          <a href="#contact" class="link-underline text-forest-dark text-sm font-medium">
+            [ Add project link / write-up ] →
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <!-- Future projects placeholder -->
+    <div class="reveal border-2 border-dashed border-stone/30 rounded-2xl p-10 text-center text-stone">
+      <p class="font-serif text-xl text-forest-dark mb-2">More on the way</p>
+      <p class="text-sm max-w-xl mx-auto">
+        Space reserved for future Python, SQL, and business analytics projects. Add new cards here
+        following the same format as above.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ATHLETICS ===================== -->
+<section id="athletics" class="py-24 md:py-32 px-6 md:px-10 bg-forest-dark text-cream">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-16">
+      <p class="uppercase tracking-[0.2em] text-sm text-sage mb-3 font-medium">Athletics</p>
+      <h2 class="font-serif text-4xl md:text-5xl">Discipline, Consistency, Competition</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-10 mb-16">
+      <div class="reveal">
+        <h3 class="font-serif text-2xl mb-3">NCAA Division I Soccer</h3>
+        <p class="text-cream/80 text-sm leading-relaxed">
+          Four years as a Division I soccer player at Saint Joseph's University — a commitment that
+          taught me how to balance rigorous academics with the demands of high-level competition.
+        </p>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <h3 class="font-serif text-2xl mb-3">HYROX</h3>
+        <p class="text-cream/80 text-sm leading-relaxed">
+          A competitive HYROX athlete with a personal best of
+          <span class="text-cream font-medium">1:07:23</span>. HYROX has become the clearest expression
+          of how I like to compete now — functional, measurable, and unforgiving of inconsistency.
+        </p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <h3 class="font-serif text-2xl mb-3">Distance Running</h3>
+        <p class="text-cream/80 text-sm leading-relaxed">
+          A runner at heart. Training for endurance has become less about competition and more about
+          a daily practice in patience and consistency.
+        </p>
+      </div>
+    </div>
+
+    <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-6 text-center border-t border-cream/15 pt-12">
+      <div>
+        <p class="font-serif text-3xl md:text-4xl text-sage">4</p>
+        <p class="text-xs uppercase tracking-wide text-cream/70 mt-2">Years of D1 Soccer</p>
+      </div>
+      <div>
+        <p class="font-serif text-3xl md:text-4xl text-sage">1:07:23</p>
+        <p class="text-xs uppercase tracking-wide text-cream/70 mt-2">HYROX Personal Best</p>
+      </div>
+      <div>
+        <p class="font-serif text-3xl md:text-4xl text-sage">3.97</p>
+        <p class="text-xs uppercase tracking-wide text-cream/70 mt-2">Undergraduate GPA</p>
+      </div>
+      <div>
+        <p class="font-serif text-3xl md:text-4xl text-sage">1</p>
+        <p class="text-xs uppercase tracking-wide text-cream/70 mt-2">App Founded (Thalk)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BEYOND THE RÉSUMÉ ===================== -->
+<section id="beyond" class="py-24 md:py-32 px-6 md:px-10">
+  <div class="max-w-5xl mx-auto">
+    <div class="reveal mb-14">
+      <p class="uppercase tracking-[0.2em] text-sm text-clay mb-3 font-medium">Beyond the Résumé</p>
+      <h2 class="font-serif text-4xl md:text-5xl text-charcoal">A Few Other Things</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+      <div class="reveal space-y-5 text-stone leading-relaxed">
+        <p>
+          I spend a lot of my free time reading — mostly philosophy and literature, usually with a
+          notebook nearby. I like ideas that hold up outside of a classroom: Stoicism, existentialism,
+          and anything that forces me to ask whether I'm actually living according to what I claim to
+          value.
+        </p>
+        <p>
+          Music and long, phone-free walks are how I think through problems, and writing is how I make
+          sense of them afterward. Thalk grew directly out of that habit — I wanted to build something
+          that made that kind of reflection more accessible to other people, not just something I did
+          for myself.
+        </p>
+      </div>
+      <div class="reveal reveal-delay-1 space-y-5 text-stone leading-relaxed">
+        <p>
+          I try to hold two things at once: genuine ambition in my professional work, and an insistence
+          on not letting that ambition flatten everything else about how I live. Nature, physical
+          training, and unstructured time matter to me as much as a good internship or a clean analysis.
+        </p>
+        <p class="italic text-forest-dark">
+          [ Space reserved for personal essays, reflections, or creative writing — add links or
+          excerpts here as you publish them. ]
+        </p>
+      </div>
+    </div>
+
+    <!-- Things I'm Exploring -->
+    <div class="reveal">
+      <h3 class="font-serif text-2xl text-charcoal mb-6">Things I'm Exploring</h3>
+      <div class="flex flex-wrap gap-3">
+        <span class="tag-chip px-5 py-2 rounded-full bg-forest/10 text-forest-dark text-sm">Stoic philosophy</span>
+        <span class="tag-chip px-5 py-2 rounded-full bg-forest/10 text-forest-dark text-sm">Behavioral finance</span>
+        <span class="tag-chip px-5 py-2 rounded-full bg-forest/10 text-forest-dark text-sm">Applied machine learning</span>
+        <span class="tag-chip px-5 py-2 rounded-full bg-forest/10 text-forest-dark text-sm">Endurance training science</span>
+        <span class="tag-chip px-5 py-2 rounded-full bg-cream-dark text-stone text-sm border border-stone/20">[ Add another interest ]</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact" class="py-24 md:py-32 px-6 md:px-10 bg-cream-dark/60">
+  <div class="max-w-4xl mx-auto text-center">
+    <p class="uppercase tracking-[0.2em] text-sm text-clay mb-3 font-medium reveal">Contact</p>
+    <h2 class="font-serif text-4xl md:text-5xl text-charcoal mb-6 reveal">Let's Connect</h2>
+    <p class="text-stone leading-relaxed max-w-xl mx-auto mb-12 reveal">
+      Whether it's about analytics, finance, Thalk, or HYROX — I'd love to hear from you.
+    </p>
+
+    <div class="grid sm:grid-cols-2 gap-5 max-w-2xl mx-auto mb-10 reveal">
+      <!-- PLACEHOLDER: Replace mailto address -->
+      <a href="mailto:your-email@example.com" class="card-hover flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-cream border border-charcoal/5 text-charcoal hover:text-forest-dark">
+        ✉️ Email — [ your-email@example.com ]
+      </a>
+      <!-- PLACEHOLDER: Replace LinkedIn URL -->
+      <a href="#" class="card-hover flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-cream border border-charcoal/5 text-charcoal hover:text-forest-dark">
+        in LinkedIn — [ Add LinkedIn URL ]
+      </a>
+      <!-- PLACEHOLDER: Replace GitHub URL -->
+      <a href="#" class="card-hover flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-cream border border-charcoal/5 text-charcoal hover:text-forest-dark">
+        ⌁ GitHub — [ Add GitHub URL ]
+      </a>
+      <!-- PLACEHOLDER: Replace Thalk link -->
+      <a href="#" class="card-hover flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-cream border border-charcoal/5 text-charcoal hover:text-forest-dark">
+        📱 Thalk — [ Add App Store link ]
+      </a>
+    </div>
+
+    <!-- PLACEHOLDER: Replace with an actual résumé file, e.g. "resume.pdf" -->
+    <a href="resume.pdf" download class="reveal inline-flex items-center gap-2 px-8 py-3 rounded-full bg-forest text-cream hover:bg-forest-dark transition-colors text-sm font-medium">
+      Download Résumé ⬇
+    </a>
+    <p class="text-xs text-stone mt-3 reveal">
+      [ Add resume.pdf to the project folder for this link to work ]
+    </p>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="py-10 px-6 md:px-10 border-t border-charcoal/10">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-stone">
+    <p>© <span id="year"></span> Vegard Bratrok. All rights reserved.</p>
+    <p class="italic">Business Analytics · Finance · Entrepreneurship · Endurance</p>
+  </div>
+</footer>
+
+<script>
+  // Set current year in footer
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Mobile menu toggle
+  const menuToggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const bar1 = document.getElementById("bar1");
+  const bar2 = document.getElementById("bar2");
+  const bar3 = document.getElementById("bar3");
+
+  menuToggle.addEventListener("click", () => {
+    const isOpen = !mobileMenu.classList.contains("hidden");
+    mobileMenu.classList.toggle("hidden");
+    menuToggle.setAttribute("aria-expanded", String(!isOpen));
+    bar1.style.transform = isOpen ? "none" : "translateY(6px) rotate(45deg)";
+    bar2.style.opacity = isOpen ? "1" : "0";
+    bar3.style.transform = isOpen ? "none" : "translateY(-6px) rotate(-45deg)";
+  });
+
+  // Close mobile menu when a link is clicked
+  document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.add("hidden");
+      menuToggle.setAttribute("aria-expanded", "false");
+      bar1.style.transform = "none";
+      bar2.style.opacity = "1";
+      bar3.style.transform = "none";
+    });
+  });
+
+  // Header background on scroll
+  const header = document.getElementById("site-header");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 10) {
+      header.classList.add("shadow-sm", "border-charcoal/10");
+    } else {
+      header.classList.remove("shadow-sm", "border-charcoal/10");
+    }
+  });
+
+  // Scroll reveal animations
+  const revealEls = document.querySelectorAll(".reveal:not(.is-visible)");
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+  revealEls.forEach((el) => revealObserver.observe(el));
+
+  // Active nav link highlighting based on scroll position
+  const sections = document.querySelectorAll("main section[id]");
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  const navObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+          navLinks.forEach((link) => {
+            link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+          });
+        }
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px" }
+  );
+  sections.forEach((section) => navObserver.observe(section));
+</script>
+
+</body>
+</html>
